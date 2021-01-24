@@ -31,6 +31,8 @@ void putLine(int x, int y, string str); // displayFormat a string at (x, y)
 
 double factorial(double x);  // Creating a factorial function 
 
+void displayHelp();   // Function to display various instructions 
+
 
 // Creating a Button class to store all the buttons.
 class Button {
@@ -81,7 +83,7 @@ int main()
 
     while (true)
     {
-        start:
+        
         clrscr(); // clear the screen
 
         putLine(26, 1, "Basic GUI Calculator");
@@ -110,30 +112,8 @@ int main()
 
         // Creating a HELP screen with various instructions
         if (input == 'h') {
-            while (true) {
-
-                clrscr();
-                putLine(-20, 0, "-> Use W,A,S,D to move the cursor");
-                putLine(-20, 1, "-> Press Enter to give the input and to press a button");
-                putLine(-20, 2, "-> To toggle between your previously entered inputs use \"Up\" and \"Down\" arrow keys.");
-                putLine(-20, 3, "-> To calculate Sine, Cosine and Tangent value, enter value in degrees");
-                putLine(-20, 4, "-> Press (END) button to exit the calculator");
-                putLine(-20, 5, "-> (10^) button calculates 10 raised to the power input give");
-                putLine(-20, 6, "-> (MOD) button calculates the modulus of the given inputs.");
-                putLine(-20, 7, "-> (log) button calculates log of the input to the base 10");
-                putLine(-20, 8, "-> (lnX) button calculates log of the input to the base e");
-                putLine(-20, 9, "-> (rnd) button rounds off the input to its nearest value");
-                putLine(-20, 10, "-> (rtX) button rounds off the input to its nearest value");
-                putLine(-20, 11, "-> (ME+) button adds the input to the last stored value in memory");
-                putLine(-20, 12, "-> (ME-) button subracts the input from the last stored value in memory");
-                putLine(-20, 13, "-> (Mes) button stores the input in the memory");
-
-                putLine(10, 15, "Press ESC to return");
-
-                input = _getch();
-                if (input == 27) goto start;          // Exiting the help screen
-
-            }
+            displayHelp();
+            continue; 
         }
 
         // cursor movements based on input
@@ -199,24 +179,23 @@ int main()
             else if (sq.hit(x, y)) { a *= a; operand = 's'; }       // Square button (x^2)
             else if (end.hit(x, y)) break;   // END button (END)
 
-            else  {
+            else {
                 clearLine(2, 15, 0);    // to clear previous input (a)
                 putLine(0, 0, "> ");
                 cin >> b;
                 cin.ignore();
-                if (add.hit(x, y)) { a = a + b; operand = '+'; }                 
+                if (add.hit(x, y)) { a = a + b; operand = '+'; }
                 else if (sub.hit(x, y)) { a = a - b; operand = '-'; }
                 else if (mul.hit(x, y)) { a = a * b; operand = '*'; }
-                else if (div.hit(x, y)) { a = a / b; operand = '/'; }            
+                else if (div.hit(x, y)) { a = a / b; operand = '/'; }
                 else if (power.hit(x, y)) { a = pow(a, b); operand = '^'; }     // Raise to power button (x^y)
-                else if (mod.hit(x, y)) { a = fmod(a,b); operand = "mod"; }     // Modulus button (MOD)
+                else if (mod.hit(x, y)) { a = fmod(a, b); operand = "mod"; }     // Modulus button (MOD)
 
             }
         }
 
 
     }
-
 
 }
 
@@ -242,4 +221,32 @@ double factorial(double x) {
     return x;
 }
 
+void displayHelp() {
 
+    int input; 
+
+    while (true) {
+
+        clrscr();
+        putLine(-20, 0, "-> Use W,A,S,D to move the cursor");
+        putLine(-20, 1, "-> Press Enter to give the input and to press a button");
+        putLine(-20, 2, "-> To toggle between your previously entered inputs use \"Up\" and \"Down\" arrow keys.");
+        putLine(-20, 3, "-> To calculate Sine, Cosine and Tangent value, enter value in degrees");
+        putLine(-20, 4, "-> Press (END) button to exit the calculator");
+        putLine(-20, 5, "-> (10^) button calculates 10 raised to the power input give");
+        putLine(-20, 6, "-> (MOD) button calculates the modulus of the given inputs.");
+        putLine(-20, 7, "-> (log) button calculates log of the input to the base 10");
+        putLine(-20, 8, "-> (lnX) button calculates log of the input to the base e");
+        putLine(-20, 9, "-> (rnd) button rounds off the input to its nearest value");
+        putLine(-20, 10, "-> (rtX) button rounds off the input to its nearest value");
+        putLine(-20, 11, "-> (ME+) button adds the input to the last stored value in memory");
+        putLine(-20, 12, "-> (ME-) button subracts the input from the last stored value in memory");
+        putLine(-20, 13, "-> (Mes) button stores the input in the memory");
+
+        putLine(10, 15, "Press ESC to return");
+
+        input = _getch();
+        if (input == 27) break;          // Exiting the help screen
+
+    }
+}
