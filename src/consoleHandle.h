@@ -15,7 +15,7 @@
 void gotoxy(short x, short y)
 {
     HANDLE hc = GetStdHandle(STD_OUTPUT_HANDLE);  // get console handle
-    COORD cursor = { x, y };
+    COORD cursor = { x+35, y+5 };
     SetConsoleCursorPosition(hc, cursor);  // set new cursor position
 }
 
